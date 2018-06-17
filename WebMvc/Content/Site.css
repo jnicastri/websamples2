@@ -1,0 +1,8 @@
+﻿.field-error-element {
+    border: 1px solid red;
+}
+
+.val-err-msg {
+    color: red;
+    font-weight: bold;
+}

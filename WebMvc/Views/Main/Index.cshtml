@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts{
+    <script type="text/javascript" src="~/Scripts/MainVM.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var data = {
+                pfName: "@Model.FirstName",
+                plName: "@Model.LastName",
+                pAge: @Model.Age,
+                pCountry: "@Model.Country",
+                cs: [
+                    "Lithuania",
+                    "Africa",
+                    "Alabama",
+                    "Canada"
+                ]
+            };
+
+            ko.validation.init({
+                registerExtenders: true,
+                messagesOnModified: true,
+                insertMessages: true,
+                parseInputAttributes: true,
+                errorElementClass: "field-error-element",
+                decorateElement: true,
+                errorClass: "val-err-msg",
+                messageTemplate: null
+            }, true);
+
+            ko.applyBindings(new pageVM(data), document.getElementById("ko-scope"));
+        });
+    </script>
+}
+
+    <div id="ko-scope" style="padding: 10px; width: 700px">
+        <div data-bind="visible: saving">Saving....</div>
+        <label for="nameTb">Name:</label>
+        <input id="nameTb" data-bind="value: FirstName, validationElement: FirstName" />
+        <br /><br />
+        <label for="lnameTb">Last Name:</label>
+        <input id="lnameTb" data-bind="value: LastName, validationElement: LastName" />
+        <br /><br />
+        <label for="ageTb">AGE:</label>
+        <input id="ageTb" data-bind="value: Age, validationElement: Age" />
+        <br /><br />
+        <label for="sellist">Country</label>
+        <select data-bind="options: countries, value: Country"></select>
+    </div>
+
+
+
